@@ -1,47 +1,25 @@
 import { stringify } from 'query-string';
 import {fetchUtils} from 'react-admin';
+import Pagination from "./framework/Pagination";
+import ResourceFilter from "./framework/ResourceFilter";
+import SpringResponse from "./framework/SpringResponse";
 
 export default (apiUrl, httpClient = fetchUtils.fetchJson, countHeader = 'Content-Range') => ({
     getList: (resource, params) => {
-        const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
-
-        const rangeStart = (page - 1) * perPage;
-        const rangeEnd = page * perPage - 1;
-
-        const query = {
-            sort: JSON.stringify([field, order]),
-            range: JSON.stringify([rangeStart, rangeEnd]),
-            filter: JSON.stringify(params.filter),
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        const options =
-            countHeader === 'Content-Range'
-                ? {
-                    // Chrome doesn't return `Content-Range` header if no `Range` is provided in the request.
-                    headers: new Headers({
-                        Range: `${resource}=${rangeStart}-${rangeEnd}`,
-                    }),
-                }
-                : {};
-
-        return httpClient(url, options).then(({ headers, json }) => {
-            if (!headers.has(countHeader)) {
-                throw new Error(
-                    `The ${countHeader} header is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare ${countHeader} in the Access-Control-Expose-Headers header?`
-                );
-            }
-            return {
-                data: json,
-                total:
-                    countHeader === 'Content-Range'
-                        ? parseInt(
-                        headers.get('content-range').split('/').pop(),
-                        10
-                        )
-                        : parseInt(headers.get(countHeader.toLowerCase())),
-            };
-        });
+        let url = '';
+        let pagination = Pagination.asSpringUrlPart(params.pagination, params.sort);
+        let filter = params.filter;
+        let typeOfListing = ResourceFilter.getTypeOfListing(filter);
+        if (typeOfListing === ResourceFilter.ENTITY) {
+            url = `${apiUrl}/${resource}?${pagination}`;
+        } else if (typeOfListing === ResourceFilter.ENTITY_BY_PARAM_LIKE) {
+            url = `${apiUrl}/${resource}/search/find?${stringify(filter)}&${pagination}`;
+        } else if (typeOfListing === ResourceFilter.ENTITY_BY_PARENT) {
+            url = `${apiUrl}/${resource}/${ResourceFilter.getResourcePath_ByParent(filter)}?${ResourceFilter.getParentParamString(filter)}&${pagination}`;
+        }
+        return httpClient(url).then(({json}) =>
+            SpringResponse.toReactAdminResourceListResponse(json, resource)
+        );
     },
 
     getOne: (resource, params) =>

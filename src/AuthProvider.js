@@ -26,7 +26,7 @@ function clearLocalStorage() {
 }
 
 class AuthProvider {
-    login(username, password, clientMetadata) {
+    login({username, password}) {
         let postObject = {email: username, password: password};
 
         let encodedObj = _.keys(postObject).map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(postObject[key])}`);
