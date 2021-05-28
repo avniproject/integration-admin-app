@@ -1,30 +1,5 @@
 import _ from 'lodash';
 
-const defaultOptions = {
-    authGroups: [],
-};
-
-const sessionDurationSeconds = 1000 * 60 * 60 * 24 * 5;
-const lastActionTimeStorageKey = "LAST_ACTION_TIME";
-
-function sessionExpired() {
-    let nowTimeStamp = new Date().getTime();
-    let lastActionTime = localStorage.getItem(lastActionTimeStorageKey);
-    let difference = Math.abs((lastActionTime ? lastActionTime : nowTimeStamp) - nowTimeStamp);
-    console.log('[AUTH PROVIDER][AUTH_LOGIN]', 'Inactivity period duration in seconds: ', difference/1000);
-    return difference > sessionDurationSeconds;
-}
-
-function updateLocalStoredTime() {
-    let lastActionTime = new Date().getTime();
-    localStorage.setItem(lastActionTimeStorageKey, lastActionTime);
-}
-
-function clearLocalStorage() {
-    localStorage.removeItem('user');
-    localStorage.removeItem(lastActionTimeStorageKey);
-}
-
 class AuthProvider {
     login({username, password}) {
         let postObject = {email: username, password: password};
@@ -58,33 +33,36 @@ class AuthProvider {
                     throw new Error(verifyLoginResponse.statusText);
                 }
                 return verifyLoginResponse.json();
-            })
-            .then((user) => {
-                localStorage.setItem('user', JSON.stringify(user));
-                updateLocalStoredTime();
+            }).then((user) => {
+                localStorage.setItem("user", user);
             });
     }
 
     logout() {
-        console.log(`[AUTH PROVIDER][AUTH_LOGOUT] Clearing local storage`);
-        clearLocalStorage();
-        return Promise.resolve();
+        console.log("AuthProvider.logout");
+        localStorage.removeItem("user");
+        return fetch(new Request('/logout', {
+            method: 'GET'
+        })).catch(() => {});
     }
 
     checkAuth() {
-        if (sessionExpired()) {
-            console.log("[AuthProvider][AUTH_CHECK]   Session expired");
-            return Promise.reject();
-        }
-        updateLocalStoredTime();
-        return localStorage.getItem('user') ? Promise.resolve() : Promise.reject();
+        console.log("AuthProvider.checkAuth");
+        return localStorage.getItem("user") ? Promise.resolve() : Promise.reject();
     }
 
-    checkError() {
+    checkError(error) {
+        console.log("AuthProvider.checkError", error.status);
+        const status = error.status;
+        if (status === 401 || status === 403) {
+            return Promise.reject();
+        }
+        // other error code (404, 500, etc): no need to log out
         return Promise.resolve();
     }
 
     getPermissions() {
+        console.log("AuthProvider.getPermissions");
         return Promise.resolve([]);
     }
 }

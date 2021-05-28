@@ -1,4 +1,4 @@
-import {Edit, EditButton, required, ReferenceInput, SelectInput, BooleanInput, SimpleForm, Datagrid, Filter, List, Create, TextField, TextInput} from "react-admin";
+import {BooleanField, ReferenceField, Edit, EditButton, required, ReferenceInput, SelectInput, BooleanInput, SimpleForm, Datagrid, Filter, List, Create, TextField, TextInput} from "react-admin";
 
 const MappingMetadataFilter = (props) => (
     <Filter {...props}>
@@ -11,11 +11,15 @@ export const MappingMetadataList = (props) => (
     <List {...props} filters={<MappingMetadataFilter/>}>
         <Datagrid>
             <TextField source="id"/>
-            <TextField source="mappingGroup"/>
-            <TextField source="mappingType"/>
+            <ReferenceField label="Mapping Group" source="mappingGroup" reference="mappingGroup">
+                <TextField source="name" />
+            </ReferenceField>
+            <ReferenceField label="Mapping Type" source="mappingType" reference="mappingType">
+                <TextField source="name" />
+            </ReferenceField>
             <TextField source="bahmniValue"/>
             <TextField source="avniValue"/>
-            <TextField source="dataTypeHint"/>
+            <BooleanField source="coded"/>
             <EditButton/>
         </Datagrid>
     </List>
@@ -32,7 +36,7 @@ function getForm(isEdit) {
         </ReferenceInput>
         <TextInput source="avniValue" />
         <TextInput source="bahmniValue" />
-        <BooleanInput source="dataTypeHint"/>
+        <BooleanInput source="coded"/>
     </SimpleForm>;
 }
 

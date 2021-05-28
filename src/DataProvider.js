@@ -17,6 +17,7 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson, countHeader = 'Conten
         } else if (typeOfListing === ResourceFilter.ENTITY_BY_PARENT) {
             url = `${apiUrl}/${resource}/${ResourceFilter.getResourcePath_ByParent(filter)}?${ResourceFilter.getParentParamString(filter)}&${pagination}`;
         }
+        console.log("DataProvider.getList", url);
         return httpClient(url).then(({json}) =>
             SpringResponse.toReactAdminResourceListResponse(json, resource)
         );
