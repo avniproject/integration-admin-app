@@ -34,8 +34,8 @@ function getForm(isEdit) {
         <ReferenceInput label="Mapping Type" source="mappingType" reference="mappingType" validate={[required("Mandatory")]}>
             <SelectInput optionText="name" />
         </ReferenceInput>
-        <TextInput source="avniValue" />
-        <TextInput source="bahmniValue" />
+        <TextInput source="avniValue" fullWidth/>
+        <TextInput source="bahmniValue" fullWidth/>
         <BooleanInput source="coded"/>
     </SimpleForm>;
 }

@@ -5,7 +5,8 @@ import ResourceFilter from "./framework/ResourceFilter";
 import SpringResponse from "./framework/SpringResponse";
 
 export default (apiUrl, httpClient = fetchUtils.fetchJson, countHeader = 'Content-Range') => ({
-    getList: (resource, params) => {
+    getList: (configuredResource, params) => {
+        let resource = configuredResource.split("-")[0];
         let url = '';
         let pagination = Pagination.asSpringUrlPart(params.pagination, params.sort);
         let filter = params.filter;
