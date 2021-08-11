@@ -24,10 +24,12 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson, countHeader = 'Conten
         );
     },
 
-    getOne: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
+    getOne: (configuredResource, params) => {
+        let resource = configuredResource.split("-")[0];
+        return httpClient(`${apiUrl}/${resource}/${params.id}`).then(({json}) => ({
             data: json,
-        })),
+        }));
+    },
 
     getMany: (resource, params) => {
         const query = {

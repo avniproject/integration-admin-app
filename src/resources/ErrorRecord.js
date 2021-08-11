@@ -1,4 +1,20 @@
-import {DateInput, Datagrid, Filter, List, ReferenceField, ReferenceInput, SelectInput, TextField, TextInput} from "react-admin";
+import {
+    BooleanField,
+    BooleanInput,
+    Datagrid,
+    DateInput,
+    Edit,
+    EditButton,
+    Filter,
+    List,
+    ReferenceField,
+    ReferenceInput,
+    SelectInput,
+    SimpleForm,
+    TextField,
+    TextInput,
+    DateField
+} from "react-admin";
 
 const ErrorRecordsFilter = (props) => (
     <Filter {...props}>
@@ -20,10 +36,27 @@ export const ErrorRecordList = (props) => (
             <TextField source="bahmniEntityType"/>
             <TextField source="entityUuid"/>
             <TextField source="errorLoggedAt"/>
+            <BooleanField source="processingDisabled"/>
+            <EditButton/>
         </Datagrid>
     </List>
 );
 
+export const ErrorRecordEdit = (props) => (
+    <Edit {...props} undoable={false}>
+        <SimpleForm>
+            <TextField source="id"/>
+            <ReferenceField label="Error type" source="errorType" reference="errorType">
+                <TextField source="name"/>
+            </ReferenceField>
+            <TextField source="avniEntityType"/>
+            <TextField source="bahmniEntityType"/>
+            <TextField source="entityUuid"/>
+            <TextField source="errorLoggedAt"/>
+            <BooleanInput source="processingDisabled"/>
+        </SimpleForm>
+    </Edit>
+);
 
 const ErrorRecordsFilterByDate = (props) => (
     <Filter {...props}>
@@ -42,7 +75,9 @@ export const ErrorRecordListByDate = (props) => (
             <TextField source="avniEntityType"/>
             <TextField source="bahmniEntityType"/>
             <TextField source="entityUuid"/>
-            <TextField source="errorLoggedAt"/>
+            <DateField source="errorLoggedAt"/>
+            <BooleanField source="processingDisabled"/>
+            <EditButton/>
         </Datagrid>
     </List>
 );
