@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import AppConfig from "./AppConfig";
 
 class AuthProvider {
     login({username, password}) {
@@ -7,13 +8,14 @@ class AuthProvider {
         let encodedObj = _.keys(postObject).map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(postObject[key])}`);
         let formBody = encodedObj.join("&");
 
-        const request = new Request('/login', {
+
+        const request = new Request(`${AppConfig.dataProviderUrl}/login`, {
             method: 'POST',
             body: formBody,
             headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'})
         });
 
-        const verifyLoginRequest = new Request('/currentUser', {
+        const verifyLoginRequest = new Request(`${AppConfig.dataProviderUrl}/currentUser`, {
             method: 'GET'
         });
 
@@ -41,7 +43,7 @@ class AuthProvider {
     logout() {
         console.log("AuthProvider.logout");
         localStorage.removeItem("user");
-        return fetch(new Request('/logout', {
+        return fetch(new Request(`${AppConfig.dataProviderUrl}/logout`, {
             method: 'GET'
         })).catch(() => {});
     }
