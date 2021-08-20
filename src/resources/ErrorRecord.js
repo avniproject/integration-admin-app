@@ -35,7 +35,7 @@ export const ErrorRecordList = (props) => (
             <TextField source="avniEntityType"/>
             <TextField source="bahmniEntityType"/>
             <TextField source="entityUuid"/>
-            <TextField source="errorLoggedAt"/>
+            <TextField source="loggedAt"/>
             <BooleanField source="processingDisabled"/>
             <EditButton/>
         </Datagrid>
@@ -52,7 +52,7 @@ export const ErrorRecordEdit = (props) => (
             <TextField source="avniEntityType"/>
             <TextField source="bahmniEntityType"/>
             <TextField source="entityUuid"/>
-            <TextField source="errorLoggedAt"/>
+            <TextField source="loggedAt"/>
             <BooleanInput source="processingDisabled"/>
         </SimpleForm>
     </Edit>
@@ -75,7 +75,7 @@ export const ErrorRecordListByDate = (props) => (
             <TextField source="avniEntityType"/>
             <TextField source="bahmniEntityType"/>
             <TextField source="entityUuid"/>
-            <DateField source="errorLoggedAt"/>
+            <DateField source="loggedAt"/>
             <BooleanField source="processingDisabled"/>
             <EditButton/>
         </Datagrid>

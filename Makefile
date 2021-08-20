@@ -21,9 +21,9 @@ deploy-ashwini:
 	cp ./env-templates/prod.template .env
 	yarn run build
 	ssh dspace-auto "rm -rf $(tmp_web_app_dir)"
-	ssh dspace-auto "mkdir $(tmp_web_app_dir)"
-	#$(call _remote_ashwini_command,"rm -rf $(web_app_dir)")
-	$(call _remote_ashwini_command,"mkdir $(web_app_dir)")
+	-ssh dspace-auto "mkdir $(tmp_web_app_dir)"
+	$(call _remote_ashwini_command,"rm -rf $(web_app_dir)")
+	-$(call _remote_ashwini_command,"mkdir $(web_app_dir)")
 	scp -r build/* dspace-auto:$(tmp_web_app_dir)
 	ssh dspace-auto "scp -r $(tmp_web_app_dir)/* ashwini:$(web_app_dir)"
 	$(call _remote_ashwini_command,"chmod -R 755 $(web_app_dir)")
