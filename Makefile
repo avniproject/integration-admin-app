@@ -1,3 +1,7 @@
+define _alert_success
+	$(call _alert_message,Script Completed)
+endef
+
 start:
 	PORT=6033 yarn start
 
@@ -28,6 +32,7 @@ deploy-ashwini:
 	ssh dspace-auto "scp -r $(tmp_web_app_dir)/* ashwini:$(web_app_dir)"
 	$(call _remote_ashwini_command,"chmod -R 755 $(web_app_dir)")
 	$(call _remote_ashwini_command,"chown -R bahmni:bahmni $(web_app_dir)")
+	$(call _alert_success)
 
 deploy-vagrant:
 	cp ./env-templates/prod.template .env

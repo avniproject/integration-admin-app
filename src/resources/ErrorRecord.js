@@ -32,11 +32,11 @@ export const ErrorRecordList = (props) => (
             <ReferenceField label="Error type" source="errorType" reference="errorType">
                 <TextField source="name"/>
             </ReferenceField>
-            <TextField source="avniEntityType"/>
-            <TextField source="bahmniEntityType"/>
-            <TextField source="entityUuid"/>
+            <TextField source="avniEntityType" sortable={false}/>
+            <TextField source="bahmniEntityType" sortable={false}/>
+            <TextField source="entityUuid" sortable={false}/>
             <TextField source="loggedAt"/>
-            <BooleanField source="processingDisabled"/>
+            <BooleanField source="processingDisabled" sortable={false}/>
             <EditButton/>
         </Datagrid>
     </List>
