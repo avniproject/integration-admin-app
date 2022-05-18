@@ -3,7 +3,7 @@ define _alert_success
 endef
 
 start:
-	PORT=6033 yarn start
+	PORT=6014 yarn start
 
 test:
 	yarn test

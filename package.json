@@ -1,21 +1,21 @@
 {
-  "name": "admin-web-app",
-  "version": "0.1.0",
+  "name": "avni-int-app",
+  "version": "0.2.0",
   "private": true,
-  "proxy": "http://localhost:6030",
+  "proxy": "http://localhost:6013",
   "homepage": "abi-admin-app",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "lodash": "^4.17.21",
-    "prop-types": "^15.7.2",
-    "ra-data-json-server": "^3.15.2",
-    "react": "^17.0.2",
-    "react-admin": "^3.15.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "@testing-library/jest-dom": "~5.16.4",
+    "@testing-library/react": "~13.2.0",
+    "@testing-library/user-event": "~14.2.0",
+    "lodash": "~4.17.21",
+    "prop-types": "~15.8.1",
+    "ra-data-json-server": "~4.0.4",
+    "react": "~18.1.0",
+    "react-admin": "~4.0.4",
+    "react-dom": "~18.1.0",
+    "react-scripts": "~5.0.1",
+    "web-vitals": "~2.1.4"
   },
   "devDependencies": {
     "chai": "^4.3.4"
