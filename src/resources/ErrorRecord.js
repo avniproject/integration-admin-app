@@ -33,8 +33,8 @@ export const ErrorRecordList = (props) => (
                 <TextField source="name"/>
             </ReferenceField>
             <TextField source="avniEntityType" sortable={false}/>
-            <TextField source="bahmniEntityType" sortable={false}/>
-            <TextField source="entityUuid" sortable={false}/>
+            <TextField source="integratingEntityType" sortable={false}/>
+            <TextField source="entityId" sortable={false}/>
             <TextField source="loggedAt"/>
             <BooleanField source="processingDisabled" sortable={false}/>
             <EditButton/>
@@ -50,8 +50,8 @@ export const ErrorRecordEdit = (props) => (
                 <TextField source="name"/>
             </ReferenceField>
             <TextField source="avniEntityType"/>
-            <TextField source="bahmniEntityType"/>
-            <TextField source="entityUuid"/>
+            <TextField source="integrationEntityType"/>
+            <TextField source="entityId"/>
             <TextField source="loggedAt"/>
             <BooleanInput source="processingDisabled"/>
         </SimpleForm>
@@ -73,8 +73,8 @@ export const ErrorRecordListByDate = (props) => (
                 <TextField source="name"/>
             </ReferenceField>
             <TextField source="avniEntityType"/>
-            <TextField source="bahmniEntityType"/>
-            <TextField source="entityUuid"/>
+            <TextField source="integrationEntityType"/>
+            <TextField source="entityId"/>
             <DateField source="loggedAt"/>
             <BooleanField source="processingDisabled"/>
             <EditButton/>

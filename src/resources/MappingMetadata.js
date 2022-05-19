@@ -3,7 +3,7 @@ import {BooleanField, ReferenceField, Edit, EditButton, required, ReferenceInput
 const MappingMetadataFilter = (props) => (
     <Filter {...props}>
         <TextInput label="Avni Value" source="avniValue" alwaysOn />
-        <TextInput label="Bahmni Value" source="bahmniValue" alwaysOn />
+        <TextInput label="Integrating System Value" source="intSystemValue" alwaysOn />
     </Filter>
 );
 
@@ -17,8 +17,8 @@ export const MappingMetadataList = (props) => (
             <ReferenceField label="Mapping Type" source="mappingType" reference="mappingType">
                 <TextField source="name" />
             </ReferenceField>
-            <TextField source="bahmniValue"/>
             <TextField source="avniValue"/>
+            <TextField source="intSystemValue" label="Integration System Value"/>
             <BooleanField source="coded"/>
             <EditButton/>
         </Datagrid>
@@ -35,7 +35,7 @@ function getForm(isEdit) {
             <SelectInput optionText="name" />
         </ReferenceInput>
         <TextInput source="avniValue" fullWidth/>
-        <TextInput source="bahmniValue" fullWidth/>
+        <TextInput source="intSystemValue" fullWidth label="Integration System Value"/>
         <BooleanInput source="coded"/>
     </SimpleForm>;
 }
