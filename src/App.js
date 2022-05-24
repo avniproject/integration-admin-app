@@ -8,8 +8,6 @@ import {UserCreate, UserEdit, UserList} from "./resources/User";
 import AppConfig from "./AppConfig";
 
 function App() {
-    console.log("process.env.REACT_APP_SERVER_API", process.env.REACT_APP_SERVER_API);
-    console.log("process.env.NODE_ENV", process.env.NODE_ENV);
     return (
         <Admin dataProvider={dataProvider(AppConfig.dataProviderUrl)} authProvider={authProvider}>
             <Resource name="mappingMetadata" list={MappingMetadataList} create={MappingMetadataCreate} edit={MappingMetadataEdit} options={{label: 'Mappings'}}/>
@@ -20,6 +18,7 @@ function App() {
             <Resource name="mappingGroup"/>
             <Resource name="mappingType"/>
             <Resource name="errorType"/>
+            <Resource name="integrationSystem"/>
         </Admin>
     );
 }
