@@ -6,6 +6,7 @@ import {MappingMetadataCreate, MappingMetadataEdit, MappingMetadataList} from ".
 import {ErrorRecordEdit, ErrorRecordList, ErrorRecordListByDate} from "./resources/ErrorRecord";
 import {UserCreate, UserEdit, UserList} from "./resources/User";
 import AppConfig from "./AppConfig";
+import {IntegrationSystemEdit, IntegrationSystemList} from "./resources/IntegrationSystem";
 
 function App() {
     return (
@@ -18,7 +19,7 @@ function App() {
             <Resource name="mappingGroup"/>
             <Resource name="mappingType"/>
             <Resource name="errorType"/>
-            <Resource name="integrationSystem"/>
+            <Resource name="integrationSystem" options={{label: 'Integration Systems'}} list={IntegrationSystemList} edit={IntegrationSystemEdit}/>
         </Admin>
     );
 }

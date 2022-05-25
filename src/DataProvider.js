@@ -32,10 +32,8 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson, countHeader = 'Conten
     },
 
     getMany: (resource, params) => {
-        const query = {
-            filter: JSON.stringify({ id: params.ids }),
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
+        const str = params.ids.join(",");
+        const url = `${apiUrl}/${resource}?ids=${str}`;
         return httpClient(url).then(({ json }) => ({ data: json }));
     },
 

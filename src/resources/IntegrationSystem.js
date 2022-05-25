@@ -5,7 +5,7 @@ export const IntegrationSystemList = ({privileges, ...props}) => (
     <List {...props} title='Users'>
         <Datagrid>
             <EditButton/>
-            <EmailField source="email"/>
+            <TextField source="name"/>
             <TextField source="id"/>
         </Datagrid>
     </List>
