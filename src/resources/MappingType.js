@@ -2,7 +2,7 @@ import React from 'react';
 import {Create, Datagrid, Edit, EditButton, email, EmailField, List, ReferenceField, required, SimpleForm, TextField, TextInput} from 'react-admin';
 
 export const MappingTypeList = ({privileges, ...props}) => (
-    <List {...props} title='Users'>
+    <List {...props} title='Users' debounce={0}>
         <Datagrid>
             <EditButton/>
             <TextField source="name"/>
@@ -19,13 +19,13 @@ let getForm = function (isEdit) {
 };
 
 export const MappingTypeEdit = props => (
-    <Edit {...props} undoable={false}>
+    <Edit {...props} mutationMode="pessimistic">
         {getForm(true)}
     </Edit>
 );
 
 export const MappingTypeCreate = props => (
-    <Create {...props} undoable={false}>
+    <Create {...props} mutationMode="pessimistic">
         {getForm(false)}
     </Create>
 );

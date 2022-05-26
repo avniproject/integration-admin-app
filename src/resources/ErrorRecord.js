@@ -43,7 +43,7 @@ export const ErrorRecordList = (props) => (
 );
 
 export const ErrorRecordEdit = (props) => (
-    <Edit {...props} undoable={false}>
+    <Edit {...props} mutationMode="pessimistic">
         <SimpleForm>
             <TextField source="id"/>
             <ReferenceField label="Error type" source="errorType" reference="errorType">

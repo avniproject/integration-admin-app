@@ -47,7 +47,7 @@ export const MappingMetadataCreate = (props) => (
 );
 
 export const MappingMetadataEdit = (props) => (
-    <Edit {...props}>
+    <Edit {...props} mutationMode="pessimistic">
         {getForm(true)}
     </Edit>
 );

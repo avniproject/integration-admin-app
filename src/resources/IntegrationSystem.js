@@ -19,7 +19,7 @@ let getForm = function (isEdit) {
 };
 
 export const IntegrationSystemEdit = props => (
-    <Edit {...props} undoable={false}>
+    <Edit {...props} mutationMode="pessimistic">
         {getForm(true)}
     </Edit>
 );
