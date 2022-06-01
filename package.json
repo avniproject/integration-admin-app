@@ -2,7 +2,7 @@
   "name": "avni-int-app",
   "version": "0.2.0",
   "private": true,
-  "proxy": "http://localhost:6013",
+  "proxy": "http://localhost:6013/int",
   "homepage": "abi-admin-app",
   "dependencies": {
     "@testing-library/jest-dom": "~5.16.4",

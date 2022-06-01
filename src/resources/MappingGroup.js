@@ -1,10 +1,9 @@
 import React from 'react';
-import {Create, Datagrid, Edit, EditButton, email, EmailField, List, ReferenceField, required, SimpleForm, TextField, TextInput} from 'react-admin';
+import {Create, Datagrid, Edit, List, required, SimpleForm, TextField, TextInput} from 'react-admin';
 
 export const MappingGroupList = ({privileges, ...props}) => (
     <List {...props} title='Users' debounce={0}>
         <Datagrid>
-            <EditButton/>
             <TextField source="name"/>
             <TextField source="id"/>
         </Datagrid>
