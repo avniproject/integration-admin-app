@@ -1,11 +1,19 @@
-import React from 'react';
-import {Create, Datagrid, Edit, List, required, SimpleForm, TextField, TextInput} from 'react-admin';
+import {
+    Datagrid,
+    Edit,
+    List,
+    SimpleForm,
+    TextField,
+    TextInput,
+    Create, required,
+} from "react-admin";
+import React from "react";
 
-export const MappingTypeList = ({privileges, ...props}) => (
-    <List {...props} title='Users'>
+export const ErrorTypeList = (props) => (
+    <List {...props}>
         <Datagrid>
-            <TextField source="name"/>
-            <TextField source="id"/>
+            <TextField source="id" sortable={true}/>
+            <TextField source="name" sortable={true}/>
         </Datagrid>
     </List>
 );
@@ -17,13 +25,13 @@ let getForm = function (isEdit) {
     </SimpleForm>;
 };
 
-export const MappingTypeEdit = props => (
+export const ErrorTypeEdit = (props) => (
     <Edit {...props} undoable={false}>
         {getForm(true)}
     </Edit>
 );
 
-export const MappingTypeCreate = props => (
+export const ErrorTypeCreate = (props) => (
     <Create {...props} undoable={false}>
         {getForm(false)}
     </Create>

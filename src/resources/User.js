@@ -1,5 +1,20 @@
 import React from 'react';
-import {Create, Datagrid, Edit, EditButton, email, EmailField, List, ReferenceField, required, SimpleForm, TextField, TextInput} from 'react-admin';
+import {
+    Create,
+    Datagrid,
+    Edit,
+    EditButton,
+    email,
+    EmailField,
+    List,
+    ReferenceField,
+    required,
+    ReferenceInput,
+    SelectInput,
+    SimpleForm,
+    TextField,
+    TextInput
+} from 'react-admin';
 
 const validateEmail = email();
 
@@ -21,6 +36,9 @@ let getForm = function (isEdit) {
         {isEdit && <TextField source="id"/>}
         <TextInput source="email" type="email" validate={[required("Mandatory"), validateEmail]} name="email"/>
         <TextInput label="New password" source="password" type="password" validate={isEdit ? [] : [required("Mandatory")]} name="password"/>
+        <ReferenceInput label="Working integration system" source="workingIntegrationSystemId" reference="integrationSystem" name="workingIntegrationSystem">
+            <SelectInput optionText="name" source="name" type="name" validate={[required("Mandatory")]} name="name" />
+        </ReferenceInput>
     </SimpleForm>;
 };
 
