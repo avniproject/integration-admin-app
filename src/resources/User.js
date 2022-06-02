@@ -36,7 +36,7 @@ let getForm = function (isEdit) {
         <TextInput source="email" type="email" validate={[required("Mandatory"), validateEmail]} name="email"/>
         {/*<TextInput label="New password" source="password" type="password" validate={isEdit ? [] : [required("Mandatory")]} name="password"/>*/}
         <ReferenceInput label="Working integration system" source="workingIntegrationSystemId" reference="integrationSystem" name="workingIntegrationSystem">
-            <SelectInput optionText="name" source="name" type="name" validate={[required("Mandatory")]} name="name" />
+            <SelectInput optionText="name" validate={[required("Mandatory")]}/>
         </ReferenceInput>
     </SimpleForm>;
 };
