@@ -14,10 +14,17 @@ build-app:
 web_app_dir := /var/www/avni-int-service
 tmp_web_app_dir := /tmp/avni-int-service
 
-zip-app: build-app zip-app-only
+zip-app:
+	cp ./env-templates/staging.template .env
+	yarn run build
+	tar -czvf avni-int-admin-app.tgz  -C build .
+	cp ./env-templates/local-apache.template .env
 
 zip-app-only:
+	cp ./env-templates/staging.template .env
 	tar -czvf avni-int-admin-app.tgz  -C build .
+	cp ./env-templates/local-apache.template .env
+
 foo:
 	$(call _remote_ashwini_command,"echo hello")
 
