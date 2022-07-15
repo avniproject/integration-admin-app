@@ -11,8 +11,8 @@ test:
 build-app:
 	yarn run build
 
-web_app_dir := /var/www/avni-int-admin-app
-tmp_web_app_dir := /tmp/avni-int-admin-app
+web_app_dir := /var/www/avni-int-service
+tmp_web_app_dir := /tmp/avni-int-service
 
 zip-app: build-app zip-app-only
 
@@ -31,7 +31,7 @@ deploy-vagrant:
 	ssh -p 2222 -i ~/.vagrant.d/insecure_private_key root@127.0.0.1 "chmod -R 755 $(web_app_dir)"
 	ssh -p 2222 -i ~/.vagrant.d/insecure_private_key root@127.0.0.1 "chown -R bahmni:bahmni $(web_app_dir)"
 
-local_web_app_dir := /Library/WebServer/Documents/avni-int-admin-app
+local_web_app_dir := /var/www/avni-int-service
 
 deploy-local:
 	-rm -rf $(local_web_app_dir)
