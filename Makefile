@@ -14,22 +14,34 @@ build-app:
 web_app_dir := /var/www/avni-int-service
 tmp_web_app_dir := /tmp/avni-int-service
 
-zip-app:
-	cp ./env-templates/staging.template .env
+_zip-app:
+	cp ./env-templates/$(template) .env
 	yarn run build
 	tar -czvf avni-int-admin-app.tgz  -C build .
 	cp ./env-templates/local-apache.template .env
 
-zip-app-only:
-	cp ./env-templates/staging.template .env
+_zip-app-only:
+	cp ./env-templates/$(template) .env
 	tar -czvf avni-int-admin-app.tgz  -C build .
 	cp ./env-templates/local-apache.template .env
+
+zip-app-prod:
+	make _zip-app template=prod.template
+
+zip-app-staging:
+	make _zip-app template=staging.template
+
+zip-app-only-prod:
+	make _zip-app-only template=prod.template
+
+zip-app-only-staging:
+	make _zip-app-only template=staging.template
 
 foo:
 	$(call _remote_ashwini_command,"echo hello")
 
 deploy-vagrant:
-	cp ./env-templates/prod.template .env
+	cp ./env-templates/$(template) .env
 	yarn run build
 	echo vagrant | pbcopy
 	ssh -p 2222 -i ~/.vagrant.d/insecure_private_key root@127.0.0.1 "rm -rf $(web_app_dir)"
