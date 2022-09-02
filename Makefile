@@ -41,8 +41,8 @@ deploy-vagrant:
 local_web_app_dir := /var/www/avni-int-service
 
 deploy-local:
-	-rm -rf $(local_web_app_dir)
-	mkdir $(local_web_app_dir)
+	rm -rf $(local_web_app_dir)
+	mkdir -p $(local_web_app_dir)
 	cp ./env-templates/local-apache.template .env
 	yarn run build
 	cp -r build/* $(local_web_app_dir)/
