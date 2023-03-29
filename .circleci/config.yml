@@ -122,9 +122,6 @@ workflows:
           requires:
             - build
       - STAGING_deploy:
-          filters:
-            branches:
-              only: main
           requires:
             - STAGING_approve
       - PRODUCTION_approve:
