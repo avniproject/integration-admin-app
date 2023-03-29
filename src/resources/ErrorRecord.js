@@ -13,8 +13,12 @@ import {
     SimpleForm,
     TextField,
     TextInput,
-    DateField
+    DateField,
+    Show,
+    SimpleShowLayout
 } from "react-admin";
+
+import { Divider } from '@mui/material';
 
 const ErrorRecordsFilter = (props) => (
     <Filter {...props}>
@@ -35,7 +39,7 @@ export const ErrorRecordList = (props) => (
             <TextField source="avniEntityType" sortable={false}/>
             <TextField source="integratingEntityType" sortable={false}/>
             <TextField source="entityId" sortable={false}/>
-            <TextField source="loggedAt"/>
+            <DateField showTime showDate source="loggedAt" options={{ dateStyle: 'short', timeStyle: 'short', timeZone: 'Asia/Kolkata'}}/>
             <BooleanField source="processingDisabled" sortable={false}/>
             <EditButton/>
         </Datagrid>
@@ -44,15 +48,20 @@ export const ErrorRecordList = (props) => (
 
 export const ErrorRecordEdit = (props) => (
     <Edit {...props} mutationMode="pessimistic">
+        <Show>
+            <SimpleShowLayout divider={<Divider flexItem />}>
+                <TextField source="id"/>
+                <ReferenceField label="Error type" source="errorType" reference="errorType">
+                    <TextField source="name"/>
+                </ReferenceField>
+                <TextField source="avniEntityType"/>
+                <TextField source="integratingEntityType"/>
+                <TextField source="entityId"/>
+                <DateField showTime showDate source="loggedAt" options={{ dateStyle: 'short', timeStyle: 'short', timeZone: 'Asia/Kolkata'}}/>
+                <TextField source="errorMsg" emptyText="*** Not available ***" sortable={false}/>
+            </SimpleShowLayout>
+        </Show>
         <SimpleForm>
-            <TextField source="id"/>
-            <ReferenceField label="Error type" source="errorType" reference="errorType">
-                <TextField source="name"/>
-            </ReferenceField>
-            <TextField source="avniEntityType"/>
-            <TextField source="integrationEntityType"/>
-            <TextField source="entityId"/>
-            <TextField source="loggedAt"/>
             <BooleanInput source="processingDisabled"/>
         </SimpleForm>
     </Edit>
@@ -75,7 +84,7 @@ export const ErrorRecordListByDate = (props) => (
             <TextField source="avniEntityType"/>
             <TextField source="integrationEntityType"/>
             <TextField source="entityId"/>
-            <DateField source="loggedAt"/>
+            <DateField showTime showDate source="loggedAt" options={{ dateStyle: 'short', timeStyle: 'short', timeZone: 'Asia/Kolkata'}}/>
             <BooleanField source="processingDisabled"/>
             <EditButton/>
         </Datagrid>
