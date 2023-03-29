@@ -1,5 +1,5 @@
 import React from 'react';
-import {Create, Datagrid, Edit, EditButton, email, EmailField, List, ReferenceField, required, SimpleForm, TextField, TextInput} from 'react-admin';
+import {Datagrid, Edit, EditButton, List, required, SimpleForm, TextField, TextInput} from 'react-admin';
 
 export const IntegrationSystemList = ({privileges, ...props}) => (
     <List {...props} title='Users'>
