@@ -38,7 +38,7 @@ commands:
           pwd
           cd ~/avni-infra/configure
           cp ~/artifacts/<< parameters.env >>-avni-int-admin-app.tgz ~/artifacts/avni-int-admin-app.tgz
-          VAULT_PASSWORD_FILE=~/.vault-pass.txt app_zip_path=~/artifacts/ make deploy-int-<< parameters.env >>
+          VAULT_PASSWORD_FILE=~/.vault-pass.txt app_zip_path=~/artifacts/ make deploy-int-webapp-<< parameters.env >>
 
       - run: rm ~/.vault-pass.txt
 
