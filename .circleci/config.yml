@@ -46,7 +46,7 @@ jobs:
 
   build:
     docker:
-      - image: cimg/node:12.22.12
+      - image: cimg/node:14.21.3
 
     working_directory: ~/avni-int
 
