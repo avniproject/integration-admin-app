@@ -46,7 +46,7 @@ jobs:
 
   build:
     docker:
-      - image: cimg/openjdk:17.0.5
+      - image: cimg/node:12.22.12
 
     working_directory: ~/avni-int
 
@@ -62,6 +62,18 @@ jobs:
       - run: sudo apt-get install make openssl
 
       - run: mkdir -p ~/artifacts;
+
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+
+      - run: yarn install
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+      - run: yarn run build
 
       - run: make zip-app-staging
 
