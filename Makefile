@@ -8,6 +8,9 @@ start:
 test:
 	yarn test
 
+deps:
+	yarn install
+
 build-app:
 	yarn run build
 
