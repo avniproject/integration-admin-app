@@ -5,7 +5,8 @@ export const IntegrationSystemList = ({privileges, ...props}) => (
     <List {...props} title='Users'>
         <Datagrid>
             <EditButton/>
-            <TextField source="name"/>
+            <TextField source="type" label="System type"/>
+            <TextField source="instanceName"/>
             <TextField source="id"/>
         </Datagrid>
     </List>
@@ -14,7 +15,8 @@ export const IntegrationSystemList = ({privileges, ...props}) => (
 let getForm = function (isEdit) {
     return <SimpleForm>
         {isEdit && <TextField source="id"/>}
-        <TextInput source="name" type="name" validate={[required("Mandatory")]} name="name"/>
+        <TextInput source="instanceName" validate={[required("Mandatory")]} name="Instance Name"/>
+        <TextInput source="type" validate={[required("Mandatory")]} name="System type"/>
     </SimpleForm>;
 };
 
