@@ -5,6 +5,9 @@ endef
 start:
 	PORT=6014 yarn start
 
+start-with-staging:
+	PORT=6014 yarn start-with-staging
+
 test:
 	yarn test
 

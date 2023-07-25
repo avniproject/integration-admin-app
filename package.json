@@ -23,6 +23,7 @@
   },
   "scripts": {
     "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
+    "start-with-staging": "REACT_APP_SERVER_API=https://int-staging.avniproject.org/int react-scripts --max_old_space_size=2048 start",
     "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "DISABLE_ESLINT_PLUGIN=true react-scripts test",
     "eject": "DISABLE_ESLINT_PLUGIN=true react-scripts eject"
