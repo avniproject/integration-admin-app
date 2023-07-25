@@ -81,11 +81,11 @@ export const ErrorRecordListByDate = (props) => (
             <ReferenceField label="Error type" source="errorType" reference="errorType">
                 <TextField source="name"/>
             </ReferenceField>
-            <TextField source="avniEntityType"/>
-            <TextField source="integratingEntityType"/>
-            <TextField source="entityId"/>
+            <TextField source="avniEntityType" sortable={false}/>
+            <TextField source="integratingEntityType" sortable={false}/>
+            <TextField source="entityId" sortable={false}/>
             <DateField showTime showDate source="loggedAt" options={{ dateStyle: 'short', timeStyle: 'short', timeZone: 'Asia/Kolkata'}}/>
-            <BooleanField source="processingDisabled"/>
+            <BooleanField source="processingDisabled" sortable={false}/>
             <EditButton/>
         </Datagrid>
     </List>
