@@ -25,7 +25,7 @@ export const UserList = ({privileges, ...props}) => (
             <EmailField source="email"/>
             <TextField source="id"/>
             <ReferenceField label="Working integration system" source="workingIntegrationSystemId" reference="integrationSystem">
-                <TextField source="name"/>
+                <TextField source="instanceName"/>
             </ReferenceField>
         </Datagrid>
     </List>
@@ -36,7 +36,7 @@ let getForm = function (isEdit) {
         <TextInput source="email" type="email" validate={[required("Mandatory"), validateEmail]} name="email"/>
         {/*<TextInput label="New password" source="password" type="password" validate={isEdit ? [] : [required("Mandatory")]} name="password"/>*/}
         <ReferenceInput label="Working integration system" source="workingIntegrationSystemId" reference="integrationSystem" name="workingIntegrationSystem">
-            <SelectInput optionText="name" validate={[required("Mandatory")]}/>
+            <SelectInput optionText="instanceName" validate={[required("Mandatory")]}/>
         </ReferenceInput>
     </SimpleForm>;
 };
