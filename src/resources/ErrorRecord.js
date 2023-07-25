@@ -82,7 +82,7 @@ export const ErrorRecordListByDate = (props) => (
                 <TextField source="name"/>
             </ReferenceField>
             <TextField source="avniEntityType"/>
-            <TextField source="integrationEntityType"/>
+            <TextField source="integratingEntityType"/>
             <TextField source="entityId"/>
             <DateField showTime showDate source="loggedAt" options={{ dateStyle: 'short', timeStyle: 'short', timeZone: 'Asia/Kolkata'}}/>
             <BooleanField source="processingDisabled"/>
