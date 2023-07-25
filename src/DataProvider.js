@@ -31,13 +31,15 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson, countHeader = 'Conten
         }));
     },
 
-    getMany: (resource, params) => {
+    getMany: (configuredResource, params) => {
+        let resource = configuredResource.split("-")[0];
         const str = params.ids.join(",");
         const url = `${apiUrl}/${resource}?ids=${str}`;
         return httpClient(url).then(({ json }) => ({ data: json }));
     },
 
-    getManyReference: (resource, params) => {
+    getManyReference: (configuredResource, params) => {
+        let resource = configuredResource.split("-")[0];
         const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
 
@@ -82,42 +84,50 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson, countHeader = 'Conten
         });
     },
 
-    update: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
+    update: (configuredResource, params) => {
+        let resource = configuredResource.split("-")[0];
+        return httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json })),
+        }).then(({ json }) => ({ data: json }))
+    },
 
     // simple-rest doesn't handle provide an updateMany route, so we fallback to calling update n times instead
-    updateMany: (resource, params) =>
-        Promise.all(
-            params.ids.map(id =>
-                httpClient(`${apiUrl}/${resource}/${id}`, {
-                    method: 'PUT',
-                    body: JSON.stringify(params.data),
-                })
-            )
-        ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
+    updateMany: (configuredResource, params) => {
+      let resource = configuredResource.split("-")[0];
+      return Promise.all(
+        params.ids.map(id =>
+          httpClient(`${apiUrl}/${resource}/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(params.data),
+          })
+        )
+      ).then(responses => ({data: responses.map(({json}) => json.id)}))
+    },
 
-    create: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}`, {
+    create: (configuredResource, params) => {
+      let resource = configuredResource.split("-")[0];
+      return httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
             data: { ...params.data, id: json.id },
-        })),
-
-    delete: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'text/plain',
-            }),
-        }).then(({ json }) => ({ data: json })),
+        }))
+    },
+    delete: (configuredResource, params) => {
+      let resource = configuredResource.split("-")[0];
+      return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+        method: 'DELETE',
+        headers: new Headers({
+          'Content-Type': 'text/plain',
+        }),
+      }).then(({json}) => ({data: json}))
+    },
 
     // simple-rest doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
-    deleteMany: (resource, params) =>
-        Promise.all(
+    deleteMany: (configuredResource, params) => {
+      let resource = configuredResource.split("-")[0];
+      return Promise.all(
             params.ids.map(id =>
                 httpClient(`${apiUrl}/${resource}/${id}`, {
                     method: 'DELETE',
@@ -128,5 +138,6 @@ export default (apiUrl, httpClient = fetchUtils.fetchJson, countHeader = 'Conten
             )
         ).then(responses => ({
             data: responses.map(({ json }) => json.id),
-        })),
+        }))
+    },
 });
