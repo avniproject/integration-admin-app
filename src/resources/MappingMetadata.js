@@ -19,7 +19,7 @@ export const MappingMetadataList = (props) => (
             </ReferenceField>
             <TextField source="avniValue"/>
             <TextField source="intSystemValue" label="Integration System Value"/>
-            <BooleanField source="coded"/>
+            <BooleanField source="coded" sortable={false}/>
             <EditButton/>
         </Datagrid>
     </List>
