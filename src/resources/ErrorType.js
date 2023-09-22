@@ -30,6 +30,8 @@ let getForm = function (isEdit) {
                    choices={[
                      { id: 'Process', name: 'Process' },
                      { id: 'Terminal', name: 'Terminal' },
+                     { id: 'Internal', name: 'Internal' },
+                     { id: 'External', name: 'External' },
                    ]}
                    source="followUpStep" name="followUpStep" validate={[required("Mandatory")]}>
       </SelectInput>
