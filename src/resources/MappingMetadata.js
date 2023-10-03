@@ -19,7 +19,7 @@ export const MappingMetadataList = (props) => (
             </ReferenceField>
             <TextField source="avniValue"/>
             <TextField source="intSystemValue" label="Integration System Value"/>
-            <BooleanField source="coded" sortable={false}/>
+            <TextField source="dataTypeHint" label="Data Type Hint" sortable={true}/>
             <EditButton/>
         </Datagrid>
     </List>
@@ -36,7 +36,18 @@ function getForm(isEdit) {
         </ReferenceInput>
         <TextInput source="avniValue" fullWidth/>
         <TextInput source="intSystemValue" fullWidth label="Integration System Value"/>
-        <BooleanInput source="coded"/>
+        <SelectInput label="Data Type Hint"
+                     choices={[
+                         { id: 'Coded', name: 'Coded' },
+                         { id: 'Date', name: 'Date' },
+                         { id: 'Numeric', name: 'Numeric' },
+                         { id: 'Text', name: 'Text' },
+                         { id: 'Boolean', name: 'Boolean' },
+                         { id: 'NA', name: 'NA' },
+                         { id: 'DateTime', name: 'DateTime' }
+                     ]}
+                     source="dataTypeHint" name="dataTypeHint" validate={[required("Mandatory")]}>
+        </SelectInput>
     </SimpleForm>;
 }
 
