@@ -30,7 +30,7 @@ const ErrorRecordsFilter = (props) => (
 );
 
 export const ErrorRecordList = (props) => (
-    <List {...props} filters={<ErrorRecordsFilter/>}>
+    <List {...props} filters={<ErrorRecordsFilter/>} sort={{ field: 'loggedAt', order: 'DESC' }}>
         <Datagrid>
             <TextField source="id"/>
             <ReferenceField label="Error type" source="errorType" reference="errorType">
@@ -75,7 +75,7 @@ const ErrorRecordsFilterByDate = (props) => (
 );
 
 export const ErrorRecordListByDate = (props) => (
-    <List {...props} filters={<ErrorRecordsFilterByDate/>}>
+    <List {...props} filters={<ErrorRecordsFilterByDate/>} sort={{ field: 'loggedAt', order: 'DESC' }}>
         <Datagrid>
             <TextField source="id"/>
             <ReferenceField label="Error type" source="errorType" reference="errorType">

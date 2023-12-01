@@ -17,7 +17,7 @@ export const MappingMetadataList = (props) => (
             <ReferenceField label="Mapping Type" source="mappingType" reference="mappingType">
                 <TextField source="name" />
             </ReferenceField>
-            <TextField source="avniValue"/>
+            <TextField source="avniValue" label="Avni Value"/>
             <TextField source="intSystemValue" label="Integration System Value"/>
             <TextField source="dataTypeHint" label="Data Type Hint" sortable={true}/>
             <EditButton/>
@@ -34,7 +34,7 @@ function getForm(isEdit) {
         <ReferenceInput label="Mapping Type" source="mappingType" reference="mappingType" validate={[required("Mandatory")]}>
             <SelectInput optionText="name" />
         </ReferenceInput>
-        <TextInput source="avniValue" fullWidth/>
+        <TextInput source="avniValue" fullWidth label="Avni Value"/>
         <TextInput source="intSystemValue" fullWidth label="Integration System Value"/>
         <SelectInput label="Data Type Hint"
                      choices={[
