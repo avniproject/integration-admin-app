@@ -35,7 +35,7 @@ zip-app-staging:
 	make _zip-app template=staging.template
 
 zip-app-rwb-staging:
-    make _zip-app template=rwb-staging.template
+	make _zip-app template=rwb-staging.template
 
 zip-app-only-prod:
 	make _zip-app-only template=prod.template
