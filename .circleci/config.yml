@@ -104,11 +104,16 @@ jobs:
 
       - run: cp ~/avni-int/avni-int-admin-app.tgz ~/artifacts/prod-avni-int-admin-app.tgz;
 
+      - run: make zip-app-rwb-staging
+
+      - run: cp ~/avni-int/avni-int-admin-app.tgz ~/artifacts/rwb-staging-avni-int-admin-app.tgz;
+
       - persist_to_workspace:
           root: ~/artifacts
           paths:
             - prod-avni-int-admin-app.tgz
             - staging-avni-int-admin-app.tgz
+            - rwb-staging-avni-int-admin-app.tgz
 
       - store_artifacts:
           path: ~/artifacts
