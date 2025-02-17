@@ -108,12 +108,17 @@ jobs:
 
       - run: cp ~/avni-int/avni-int-admin-app.tgz ~/artifacts/rwb-staging-avni-int-admin-app.tgz;
 
+      - run: make zip-app-rwb-prod
+
+      - run: cp ~/avni-int/avni-int-admin-app.tgz ~/artifacts/rwb-prod-avni-int-admin-app.tgz;
+
       - persist_to_workspace:
           root: ~/artifacts
           paths:
             - prod-avni-int-admin-app.tgz
             - staging-avni-int-admin-app.tgz
             - rwb-staging-avni-int-admin-app.tgz
+            - rwb-prod-avni-int-admin-app.tgz
 
       - store_artifacts:
           path: ~/artifacts
@@ -169,6 +174,23 @@ jobs:
           hostname: "etl-staging.rwb.avniproject.org"
           env: "rwb-staging"
 
+  RWB_PROD_deploy:
+    docker:
+      - image: circleci/openjdk:11-jdk
+        environment:
+          ANSIBLE_HOST_KEY_CHECKING: no
+    working_directory: ~/
+    steps:
+      - aws-cli/setup:
+          role_arn: "arn:aws:iam::730335671779:role/avni_circleci_instance_connect"
+          region: "ap-south-1"
+      - setup_server_access:
+          instance-id: "i-067dc4ef8c36f8053"
+          availability-zone: "ap-south-1a"
+      - deploy:
+          hostname: "etl.rwb.avniproject.org"
+          env: "rwb-prod"
+
 workflows:
   version: 2
   build_and_deploy:
@@ -198,3 +220,11 @@ workflows:
           context: non-prod-deploy
           requires:
             - RWB_STAGING_approve
+      - RWB_PROD_approve:
+          type: approval
+          requires:
+            - build
+      - RWB_PROD_deploy:
+          context: prod-deploy
+          requires:
+            - RWB_PROD_approve

@@ -37,11 +37,20 @@ zip-app-staging:
 zip-app-rwb-staging:
 	make _zip-app template=rwb-staging.template
 
+zip-app-rwb-prod:
+	make _zip-app template=rwb-prod.template
+
 zip-app-only-prod:
 	make _zip-app-only template=prod.template
 
 zip-app-only-staging:
 	make _zip-app-only template=staging.template
+
+zip-app-only-rwb-prod:
+	make _zip-app-only template=rwb-prod.template
+
+zip-app-only-rwb-staging:
+	make _zip-app-only template=rwb-staging.template
 
 foo:
 	$(call _remote_ashwini_command,"echo hello")
