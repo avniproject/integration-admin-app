@@ -130,7 +130,7 @@ jobs:
 
   PRERELEASE_deploy:
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/deploy:2024.11
         environment:
           ANSIBLE_HOST_KEY_CHECKING: no
     working_directory: ~/
@@ -147,7 +147,7 @@ jobs:
 
   STAGING_deploy:
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/deploy:2024.11
         environment:
           ANSIBLE_HOST_KEY_CHECKING: no
     working_directory: ~/
@@ -164,7 +164,7 @@ jobs:
 
   PRODUCTION_deploy:
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/deploy:2024.11
         environment:
           ANSIBLE_HOST_KEY_CHECKING: no
     working_directory: ~/
@@ -181,7 +181,7 @@ jobs:
 
   RWB_STAGING_deploy:
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/deploy:2024.11
         environment:
           ANSIBLE_HOST_KEY_CHECKING: no
     working_directory: ~/
@@ -198,7 +198,7 @@ jobs:
 
   RWB_PROD_deploy:
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/deploy:2024.11
         environment:
           ANSIBLE_HOST_KEY_CHECKING: no
     working_directory: ~/
