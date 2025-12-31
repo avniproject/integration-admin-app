@@ -31,6 +31,9 @@ _zip-app-only:
 zip-app-prod:
 	make _zip-app template=prod.template
 
+zip-app-prerelease:
+	make _zip-app template=prerelease.template
+
 zip-app-staging:
 	make _zip-app template=staging.template
 
@@ -51,6 +54,9 @@ zip-app-only-rwb-prod:
 
 zip-app-only-rwb-staging:
 	make _zip-app-only template=rwb-staging.template
+
+zip-app-only-prerelease:
+	make _zip-app-only template=prerelease.template
 
 foo:
 	$(call _remote_ashwini_command,"echo hello")

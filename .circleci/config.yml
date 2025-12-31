@@ -96,6 +96,10 @@ jobs:
 
       - run: yarn run build
 
+      - run: make zip-app-prerelease
+
+      - run: cp ~/avni-int/avni-int-admin-app.tgz ~/artifacts/prerelease-avni-int-admin-app.tgz;
+
       - run: make zip-app-staging
 
       - run: cp ~/avni-int/avni-int-admin-app.tgz ~/artifacts/staging-avni-int-admin-app.tgz;
@@ -116,12 +120,30 @@ jobs:
           root: ~/artifacts
           paths:
             - prod-avni-int-admin-app.tgz
+            - prerelease-avni-int-admin-app.tgz
             - staging-avni-int-admin-app.tgz
             - rwb-staging-avni-int-admin-app.tgz
             - rwb-prod-avni-int-admin-app.tgz
 
       - store_artifacts:
           path: ~/artifacts
+
+  PRERELEASE_deploy:
+    docker:
+      - image: circleci/openjdk:11-jdk
+        environment:
+          ANSIBLE_HOST_KEY_CHECKING: no
+    working_directory: ~/
+    steps:
+      - aws-cli/setup:
+          role_arn: "arn:aws:iam::118388513628:role/avni_circleci_instance_connect"
+          region: "ap-south-1"
+      - setup_server_access:
+          instance-id: "i-0a357dbb9e5a91ca2"
+          availability-zone: "ap-south-1b"
+      - deploy:
+          hostname: "int-prerelease.avniproject.org"
+          env: "prerelease"
 
   STAGING_deploy:
     docker:
@@ -196,6 +218,14 @@ workflows:
   build_and_deploy:
     jobs:
       - build
+      - PRERELEASE_approve:
+          type: approval
+          requires:
+            - build
+      - PRERELEASE_deploy:
+          context: non-prod-deploy
+          requires:
+            - PRERELEASE_approve
       - STAGING_approve:
           type: approval
           requires:
